@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Homepage
+{% endblock title %}
+
+{% block content %}
+<h1>Categories</h1>
+{% for cat in categories %}
+    <ul>
+        <a href="{% url 'store:category' cat.slug %}">
+            <li>{{cat.name}}</li>
+        </a>
+    </ul>
+{% endfor %}
+<h1>All Books</h1>
+{% for prod in products %}
+    <ul>
+        <a href="{% url 'store:product' prod.slug %}">
+            <li>
+                {{prod.title}}
+            </li>
+        </a>
+    </ul>
+{% endfor %}
+{% endblock content %}

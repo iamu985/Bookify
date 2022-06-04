@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Products
+{% endblock title %}
+
+{% block content %}
+<ul>
+    <li>Title: {{product.title}} </li>
+    <li>Author: {{product.author}} </li>
+    <li>Provided by: {{product.created_by}} </li>
+    <li>Created on: {{product.created}} </li>
+    <li>Updated on: {{product.updated}} </li>
+    <img src="{{product.image.url}}" alt="image">
+    
+</ul>
+{% endblock content %}
