@@ -4,7 +4,7 @@ from .models import Product, Category
 def index(request):
     products = Product.objects.all()
     categories = Category.objects.all()
-    context = {'products':products, 'categories':categories}
+    context = {'products':products[:4], 'categories':categories[:4]}
     return render(request, 'store/index.html', context=context)
 
 def category_view(request, category_slug):

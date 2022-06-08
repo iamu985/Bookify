@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Product, Category
 
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'slug']
+    list_display = ['name', 'id', 'slug']
     prepopulated_fields = {'slug':('name',)}
 
 class ProductAdmin(admin.ModelAdmin):

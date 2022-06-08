@@ -5,22 +5,39 @@ Homepage
 {% endblock title %}
 
 {% block content %}
-<h1>Categories</h1>
-{% for cat in categories %}
-    <ul>
-        <a href="{% url 'store:category' cat.slug %}">
-            <li>{{cat.name}}</li>
-        </a>
-    </ul>
-{% endfor %}
-<h1>All Books</h1>
-{% for prod in products %}
-    <ul>
-        <a href="{% url 'store:product' prod.slug %}">
-            <li>
-                {{prod.title}}
-            </li>
-        </a>
-    </ul>
-{% endfor %}
+    <h1>Categories</h1>
+        <div class="row justify-content-center">
+            {% for cat in categories %}
+            <div class="col my-3">
+                <div class="card text-center" style="width: 18rem;">
+                    <img src="{{cat.image.url}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title mx-2">{{cat.get_proper_name}}</h5>
+                        <div class="d-grid gap-2">
+                            <a href="{{cat.get_absolute_url}}" class="btn btn-outline-dark">Catalogue <i class="bi bi-arrow-right"></i> </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    <h1>Books</h1>
+    <div class="row">
+        {% for prod in products %}
+        <div class="col my-3">
+            <div class="card text-center" style="width: 18rem;">
+                <img src="{{prod.image.url}}" class="card-img-top" alt="image">
+                <div class="card-body">
+                    <h5 class="card-title mx-2">{{prod.get_proper_title}}</h5>
+                        <div class="d-grid gap-2">
+                        <a href="{{prod.get_absolute_url}}" class="btn btn-outline-dark">View Details</a>
+                        </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
 {% endblock content %}
