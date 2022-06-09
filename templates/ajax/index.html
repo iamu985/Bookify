@@ -1,0 +1,42 @@
+{% extends 'ajax/base.html' %}
+{% block content %}
+
+
+<h1>Form</h1>
+<form action="{% url 'ajax:index' %}" id="submit-form" method="POST">
+    {% csrf_token %}
+    <ul>
+        {{form.as_p}}
+        <button type="submit">Submit</button>
+
+    </ul>
+
+</form>
+<h1>List of Profiles</h1>
+<ul id="display">
+
+</ul>
+<script>
+    $(document).ready(function() {
+        setInterval(function() {
+            $.ajax({
+                type: 'GET',
+                url: "{% url 'ajax:get_profiles' %}",
+                success: function(response) {
+                    $("#display").empty();
+                    for (var key in response.profiles){
+                        
+                        var temp = "<li>" + response.profiles[key].username + "</li>";
+                        $("#display").append(temp);
+                    }
+                },
+                error: function(response) {
+                    alert('Something went wrong!');
+                }
+
+            })
+        }, 1000)
+    })
+</script>
+{% endblock content %}
+
