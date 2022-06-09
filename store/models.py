@@ -43,9 +43,35 @@ class Product(models.Model):
     def get_absolute_url(self):
         return reverse("store:product", args=[self.slug])
     
-
     def __str__(self):
         return self.title
+    
+class Order(models.Model):
+    QUANTITY = [
+        (1, '1'),
+        (2, '2'),
+        (6, '6')
+    ]
+
+    STATUS = [
+        ('P', 'Pending'),
+        ('S', 'Shipped'),
+        ('D', 'Delivered'),
+    ]
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    ordered_on = models.DateTimeField(auto_now=True)
+    delivered_on = models.DateTimeField(blank=True)
+    quantity = models.IntegerField(default=1, choices=QUANTITY)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.CharField(max_length=1, choices=STATUS, default="P")
+    class Meta:
+        ordering = ["-ordered_on"]
+    
+    def get_total_payment(self):
+        return self.quantity * self.product.price
+    
+    def __str__(self):
+        return f"O-{self.id}-{self.product.title}"
     
     
 

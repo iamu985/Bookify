@@ -26,7 +26,10 @@ SECRET_KEY = 'django-insecure-$y50+j2u^1*f%wd0bqkp^vwb^^g^oew21=dmt3)@7(sy^4i=(@
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'testserver',
+    'localhost',
+]
 
 
 # Application definition
@@ -40,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'store',
+    'cart',
     'widget_tweaks',
 ]
 

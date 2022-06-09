@@ -4,5 +4,16 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+    <a href="{% url 'cart:cart_view' %}" class="d-flex btn btn-dark position-relative">
+      My Cart <i class="mx-2 bi bi-cart"></i>
+      
+        {% if request.user.cart_set.count > 0 %}
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning" style="color:black">
+          +{{request.user.cart_set.count}}
+        {% endif %}
+        
+
+      </span>
+    </a>
   </div>
 </nav>

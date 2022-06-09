@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}
+Cart
+{% endblock title %}
+
+{% block content %}
+<h1>My Cart</h1>
+You have {{request.user.cart_set.count}} items in your Cart!
+<div class="row">
+    {% for prod in products %}
+    <div class="col my-3">
+        <div class="card text-center" style="width: 18rem;">
+            <img src="{{prod.product.image.url}}" class="card-img-top" alt="image">
+            <div class="card-body">
+                <h5 class="card-title mx-2">{{prod.product.get_proper_title}}</h5>
+                    <div class="d-grid gap-2">
+                    <a href="{{prod.product.get_absolute_url}}" class="btn btn-outline-dark">View Details</a>
+                    <a href="{% url 'cart:delete_cart' prod.cart_no %}" class="btn btn-outline-danger">Delete</a>
+                    </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

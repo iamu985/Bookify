@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Product, Category
+from .forms import OrderForm
 
 def index(request):
     products = Product.objects.all()
@@ -14,6 +15,7 @@ def category_view(request, category_slug):
     return render(request, 'store/categories.html', context)
     
 def product_view(request, product_slug):
+    form = OrderForm()
     product = Product.objects.get(slug=product_slug)
-    context = {'product':product}
-    return render(request, 'store/product-view.html', context)
+    context = {'product':product, 'form':form}
+    return render(request, 'store/single.html', context)
